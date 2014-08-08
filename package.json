@@ -1,0 +1,23 @@
+{
+  "name": "abba",
+  "version": "0.0.1",
+  "description": "Minimal A/B testing library",
+  "main": "index.js",
+  "scripts": {
+    "test": "jake test --trace"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mde/abba.git"
+  },
+  "keywords": [
+    "A/B",
+    "bucket",
+    "testing"
+  ],
+  "author": "Matthew Eernisse <mde@fleegix.org> (http://fleegix.org)",
+  "license": "Apache v2",
+  "bugs": {
+    "url": "https://github.com/mde/abba/issues"
+  }
+}
