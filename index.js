@@ -70,4 +70,8 @@ module.exports = new (function () {
     }
   };
 
+  this.generateStartPoint = function () {
+   return Math.random() * (100 - 1) + 1;
+  };
+
 })();
