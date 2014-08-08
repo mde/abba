@@ -5,4 +5,8 @@ publishTask('abba', [
 , 'package.json'
 ]);
 
+testTask('ABBA', function () {
+  this.testFiles.include('test/**/*.js');
+});
+
 

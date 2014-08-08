@@ -19,5 +19,8 @@
   "license": "Apache v2",
   "bugs": {
     "url": "https://github.com/mde/abba/issues"
+  },
+  "dependencies": {
+    "utilities": "0.0.40"
   }
 }

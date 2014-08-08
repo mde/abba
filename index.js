@@ -5,7 +5,8 @@ var utils = require('utilities'),
     Experiment;
 
 config = {
-  idField: '_id'
+  idField: '_id',
+  hexIds: true
 };
 
 Experiment = function (name, percent, startPoint, options) {
@@ -30,6 +31,43 @@ module.exports = new (function () {
       var ex = new Experiment(d.name, d.percent, d.startPoint, d);
       experiments[d.name] = ex;
     });
+  };
+
+  this.treat = function (user) {
+    var self = this;
+    user.inExperiment = function (name) {
+      var id = user[config.idField];
+      if (typeof id == 'undefined') {
+        id = user.id;
+      }
+      return self.inExperiment(id, name);
+    };
+  };
+
+  this.inExperiment = function (userId, name) {
+    var ex = experiments[name],
+    // Get a 0-256 int out of the hex UUID
+        id,
+        mod;
+
+    if (config.hexIds) {
+      id = parseInt(userId.toString().substr(-2), 16);
+    }
+    else {
+      id = parseInt(userId.toString().substr(-2), 10);
+    }
+    mod = id % 100;
+    if (mod === 0) {
+      mod = 100;
+    }
+    var endPoint = ex.startPoint + ex.percent - 1;
+    if (endPoint > 100) {
+      return ((mod >= ex.startPoint && mod <= 100)) ||
+          (mod >= 1 && mod <= (0 + (endPoint - 100)));
+    }
+    else {
+      return mod >= ex.startPoint && mod <= endPoint;
+    }
   };
 
 })();
