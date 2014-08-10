@@ -35,7 +35,7 @@ module.exports = new (function () {
 
   this.treat = function (user) {
     var self = this;
-    user.inExperiment = function (name) {
+    user.inExperiment = user.inExperiment || function (name) {
       var id = user[config.idField];
       if (typeof id == 'undefined') {
         id = user.id;
@@ -50,12 +50,27 @@ module.exports = new (function () {
         id,
         mod;
 
+    // Exclusion-overrides take precedence
+    if (ex.excludeIds) {
+      if (ex.excludeIds.indexOf(userId) > -1) {
+        return false;
+      }
+    }
+    // Next look for inclusion overrides
+    if (ex.includeIds) {
+      if (ex.includeIds.indexOf(userId) > -1) {
+        return true;
+      }
+    }
+
+    // No overrides, just do the experiment
     if (config.hexIds) {
       id = parseInt(userId.toString().substr(-2), 16);
     }
     else {
       id = parseInt(userId.toString().substr(-2), 10);
     }
+
     mod = id % 100;
     if (mod === 0) {
       mod = 100;
