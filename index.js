@@ -45,7 +45,7 @@ module.exports = new (function () {
   };
 
   this.inExperiment = function (userId, name) {
-    var ex = experiments[name],
+    var ex = this.getExperiment(name),
     // Get a 0-256 int out of the hex UUID
         id,
         mod;
@@ -87,6 +87,10 @@ module.exports = new (function () {
 
   this.generateStartPoint = function () {
    return Math.random() * (100 - 1) + 1;
+  };
+
+  this.getExperiment = function (name) {
+    return experiments[name];
   };
 
 })();
