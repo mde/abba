@@ -50,6 +50,10 @@ module.exports = new (function () {
         id,
         mod;
 
+    if (!ex) {
+      throw new Error('Experiment "' + name + '" does not exist');
+    }
+
     // Exclusion-overrides take precedence
     if (ex.excludeIds) {
       if (ex.excludeIds.indexOf(userId) > -1) {
