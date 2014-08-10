@@ -1,6 +1,6 @@
 {
   "name": "abba",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Minimal A/B testing library",
   "main": "index.js",
   "scripts": {
