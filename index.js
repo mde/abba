@@ -86,7 +86,7 @@ module.exports = new (function () {
   };
 
   this.generateStartPoint = function () {
-   return Math.random() * (100 - 1) + 1;
+   return parseInt(Math.random() * (100 - 1) + 1, 10);
   };
 
   this.getExperiment = function (name) {
